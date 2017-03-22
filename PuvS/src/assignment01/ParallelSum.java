@@ -19,13 +19,12 @@ public class ParallelSum {
 		int[] data = initializeArray(length);
 		int seq_sum = seq_sum(data);
 		int exec_serv_sum = exec_serv_sum(data, parts);
-		int fork_join_sum = fork_join_sum(data, parts); 
+		int fork_join_sum = fork_join_sum(data, parts);
 		int stream_sum = stream_sum(data);
 		System.out.println("Seq_Sum: " + seq_sum + ", Executer_Service_Sum: " + exec_serv_sum + ", Fork_Join_Sum: "
 				+ fork_join_sum + ", Stream_Sum: " + stream_sum);
 	}
 
-	
 	public static int[] initializeArray(int length) {
 		int[] data = new Random().ints(length).toArray();
 		return data;
