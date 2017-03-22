@@ -3,7 +3,7 @@ package assignment01;
 import java.util.Arrays;
 import java.util.concurrent.RecursiveTask;
 
-@SuppressWarnings("serial")
+@SuppressWarnings("serial") 
 public class SumWorker extends RecursiveTask<Integer> {
 
 	private int[] data;
