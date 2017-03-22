@@ -14,15 +14,21 @@ import java.util.concurrent.Future;
 public class ParallelSum {
 
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
-		final int length = 1000;
+
+		int length = 1000;
 		int parts = 10;
+
 		int[] data = initializeArray(length);
+
 		int seq_sum = seq_sum(data);
 		int exec_serv_sum = exec_serv_sum(data, parts);
 		int fork_join_sum = fork_join_sum(data, parts);
 		int stream_sum = stream_sum(data);
-		System.out.println("Seq_Sum: " + seq_sum + ", Executer_Service_Sum: " + exec_serv_sum + ", Fork_Join_Sum: "
-				+ fork_join_sum + ", Stream_Sum: " + stream_sum);
+
+		System.out.println("Seq_Sum: " + seq_sum);
+		System.out.println("Executer_Service_Sum: " + exec_serv_sum);
+		System.out.println("Fork_Join_Sum: " + fork_join_sum);
+		System.out.println("Stream_Sum: " + stream_sum);
 	}
 
 	public static int[] initializeArray(int length) {
@@ -42,23 +48,29 @@ public class ParallelSum {
 		ExecutorService es = Executors.newFixedThreadPool(4);
 		List<Future<Integer>> f = new LinkedList<Future<Integer>>();
 		int partLength = data.length / parts;
+		partLength += data.length % parts == 0 ? 0 : 1;
 		int sum = 0;
+
 		for (int i = 0; i < parts; i++) {
-			int[] subArray = Arrays.copyOfRange(data, i * partLength, (i + 1) * partLength);
-			Callable<Integer> c = new SumCallable(subArray);
+			Callable<Integer> c = new SumCallable(data, i * partLength, (i + 1) * partLength - 1);
 			Future<Integer> fut = es.submit(c);
 			f.add(fut);
 		}
+
 		for (Future<Integer> fut : f) {
 			sum += fut.get();
 		}
+
 		es.shutdown();
 		return sum;
 	}
 
 	public static int fork_join_sum(int[] data, int parts) {
-		ForkJoinPool pool = new ForkJoinPool();
-		int sum = pool.invoke(new SumWorker(data, data.length / parts));
+		ForkJoinPool pool = new ForkJoinPool(4);
+
+		int sum = pool.invoke(new SumWorker(data, 0, data.length - 1, data.length / parts));
+
+		pool.shutdown();
 		return sum;
 	}
 
