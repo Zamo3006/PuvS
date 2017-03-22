@@ -25,6 +25,7 @@ public class ParallelSum {
 				+ fork_join_sum + ", Stream_Sum: " + stream_sum);
 	}
 
+	
 	public static int[] initializeArray(int length) {
 		int[] data = new Random().ints(length).toArray();
 		return data;
