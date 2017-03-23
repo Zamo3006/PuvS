@@ -3,12 +3,9 @@ package assignment02;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-
-import assignment01.SumCallable;
 
 public class ParallelPrefixExec {
 	private ExecutorService es;

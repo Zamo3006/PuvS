@@ -1,18 +1,10 @@
 package assignment02;
 
 import java.util.Arrays;
-import java.util.function.IntBinaryOperator;
 
 public class ParallelPrefix {
 	private int[] data;
-	private IntBinaryOperator op = new MyIntOperator();
 	
-    public class MyIntOperator implements IntBinaryOperator {
-        @Override
-        public int applyAsInt(int left, int right) {
-            return left+right;
-        }
-    }
  
 
 	public void initializeArray(int length) {
@@ -40,8 +32,9 @@ public class ParallelPrefix {
 	}
 	
 	public void streamPrefix(){
-		Arrays.parallelPrefix(data, op);
+		Arrays.parallelPrefix(data,Integer::sum);
 	}
+	
 	public void parPrefixSum() {
 		for(int d = 0; d<Math.log(data.length)/Math.log(2);d++){
 			
