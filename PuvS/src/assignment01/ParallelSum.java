@@ -16,36 +16,46 @@ public class ParallelSum {
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 
 		int length = 100000000;
-		int parts = 100;
+		int parts = 200;
+		int[] data = initializeArray(length);
+		for (int i = 0; i < 120; i++) {
+			System.out.println("Iteration"+i);
+			sums(data, parts, i);
+		}
+
+	}
+
+	public static void sums(int[] data, int parts, int i) throws InterruptedException, ExecutionException {
 		long start = 0;
 		long end = 0;
-		int[] data = initializeArray(length);
 
-		start=System.currentTimeMillis();
+		start = System.currentTimeMillis();
 		int seq_sum = seq_sum(data);
-		end=System.currentTimeMillis();
-		long seqTime = end-start;
-		start=System.currentTimeMillis();
+		end = System.currentTimeMillis();
+		long seqTime = end - start;
+		start = System.currentTimeMillis();
 		int exec_serv_sum = exec_serv_sum(data, parts);
-		end=System.currentTimeMillis();
-		long execTime = end-start;
-		start=System.currentTimeMillis();
+		end = System.currentTimeMillis();
+		long execTime = end - start;
+		start = System.currentTimeMillis();
 		int fork_join_sum = fork_join_sum(data, parts);
-		end=System.currentTimeMillis();
-		long forkTime = end-start;
-		start=System.currentTimeMillis();
+		end = System.currentTimeMillis();
+		long forkTime = end - start;
+		start = System.currentTimeMillis();
 		int stream_sum = stream_sum(data);
-		end=System.currentTimeMillis();
-		long streamTime = end-start;
+		end = System.currentTimeMillis();
+		long streamTime = end - start;
 
-		System.out.println("Seq_Sum: " + seq_sum);
-		System.out.println(seqTime);
-		System.out.println("Executer_Service_Sum: " + exec_serv_sum);
-		System.out.println(execTime);
-		System.out.println("Fork_Join_Sum: " + fork_join_sum);
-		System.out.println(forkTime);
-		System.out.println("Stream_Sum: " + stream_sum);
-		System.out.println(streamTime);
+		if (i > 100) {
+			// System.out.println("Seq_Sum: " + seq_sum);
+			System.out.println("seq: " + seqTime);
+			// System.out.println("Executer_Service_Sum: " + exec_serv_sum);
+			System.out.println("exec: " + execTime);
+			// System.out.println("Fork_Join_Sum: " + fork_join_sum);
+			System.out.println("fork: " + forkTime);
+			// System.out.println("Stream_Sum: " + stream_sum);
+			System.out.println("stream: " + streamTime);
+		}
 	}
 
 	public static int[] initializeArray(int length) {
