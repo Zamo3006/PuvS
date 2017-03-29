@@ -1,6 +1,8 @@
 Laptop, Array-Length: 2^25, 1000 Iterationen: 
 Executor-Median, 4 Threads: 30082
 Executor-Median, 2 Threads: 34562
+Executor-Median, 200 Threads: 89606
+Executor-Median, 8 Threads: 28162
 Seq-Median: 58457240
 Stream-Median: 75627542
 
@@ -10,12 +12,18 @@ Executor-Median, 2 Threads: 640
 Seq-Median: 640
 Stream-Median: 21121
 
-Laptop, Array-Length: 2^25, 1000 Iterationen:
-Executor-Median, 4 Threads: 39043
-Executor-Median, 8 Threads: 28162
-Seq-Median: 58279309
 
-Laptop, Array-Length: 2^25, 1000 Iterationen:
-Executor-Median, 4 Threads: 43523
-Executor-Median, 200 Threads: 89606
-Seq-Median: 58768298
+
+PC, Array-Length: 2^25, 1000 Iterationen: 
+Executor-Median, 4 Threads: 9362
+Executor-Median, 8 Threads: 7022
+Executor-Median, 16 Threads: 8485
+Executor-Median, 200 Threads: 47104
+Seq-Median:    18011574
+Stream-Median: 18749146
+
+PC, Array-Length: 2^10, 1000 Iterationen:
+Executor-Median, 4 Threads: 586
+Executor-Median, 8 Threads: 1755
+Seq-Median: 292
+Stream-Median: 3804
